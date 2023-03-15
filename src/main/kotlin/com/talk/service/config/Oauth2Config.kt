@@ -1,5 +1,6 @@
 package com.talk.service.config
 
+import com.talk.service.oauth2.HttpCookieOauth2AuthorizationRequestRepository
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientManager
@@ -28,6 +29,7 @@ class Oauth2Config {
         authorizedClientManager.setAuthorizedClientProvider(authorizedClientProvider)
         return authorizedClientManager
     }
+
     @Bean
     fun webClient(authorizedClientManager: OAuth2AuthorizedClientManager): WebClient {
         val oauth2Client = ServletOAuth2AuthorizedClientExchangeFilterFunction(authorizedClientManager)
@@ -36,4 +38,7 @@ class Oauth2Config {
                 .build()
     }
 
+    @Bean
+    fun httpCookieOauth2AuthorizationRequestRepository(): HttpCookieOauth2AuthorizationRequestRepository =
+            HttpCookieOauth2AuthorizationRequestRepository()
 }
