@@ -12,7 +12,7 @@ object CookieUtils {
         val cookies: Array<Cookie> = request.cookies
         if (cookies.isNotEmpty()) {
             for (cookie in cookies) {
-                if (cookie.getName().equals(name)) {
+                if (cookie.name.equals(name)) {
                     return cookie
                 }
             }
@@ -22,9 +22,9 @@ object CookieUtils {
 
     fun addCookie(response: HttpServletResponse, name: String, value: String, maxAge: Int) {
         val cookie = Cookie(name, value)
-        cookie.setPath("/")
-        cookie.setHttpOnly(true)
-        cookie.setMaxAge(maxAge)
+        cookie.path = "/"
+        cookie.isHttpOnly = true
+        cookie.maxAge = maxAge
         response.addCookie(cookie)
     }
 
@@ -32,10 +32,10 @@ object CookieUtils {
         val cookies: Array<Cookie> = request.cookies
         if (cookies.isNotEmpty()) {
             for (cookie in cookies) {
-                if (cookie.getName().equals(name)) {
-                    cookie.setValue("")
-                    cookie.setPath("/")
-                    cookie.setMaxAge(0)
+                if (cookie.name.equals(name)) {
+                    cookie.value = ""
+                    cookie.path = "/"
+                    cookie.maxAge = 0
                     response.addCookie(cookie)
                 }
             }
