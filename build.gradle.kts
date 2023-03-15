@@ -9,7 +9,7 @@ plugins {
 	kotlin("plugin.allopen") version "1.8.0"
 }
 
-group = "com.talk"
+group = "com.talk.client"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
 

@@ -1,4 +1,4 @@
-package com.talk.service.util
+package com.talk.client.service.util
 
 import jakarta.servlet.http.Cookie
 import jakarta.servlet.http.HttpServletRequest
