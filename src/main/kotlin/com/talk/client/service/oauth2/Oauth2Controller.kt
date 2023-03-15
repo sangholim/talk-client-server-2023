@@ -1,6 +1,6 @@
-package com.talk.service.oauth2
+package com.talk.client.service.oauth2
 
-import com.talk.service.util.CookieUtils
+import com.talk.client.service.util.CookieUtils
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient
 import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient

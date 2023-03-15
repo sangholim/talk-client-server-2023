@@ -1,4 +1,4 @@
-package com.talk.service.oauth2
+package com.talk.client.service.oauth2
 
 import org.springframework.security.oauth2.core.AbstractOAuth2Token
 import java.time.Duration
