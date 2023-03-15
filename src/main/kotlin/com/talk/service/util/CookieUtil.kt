@@ -10,35 +10,24 @@ import java.util.*
 object CookieUtils {
     fun getCookie(request: HttpServletRequest, name: String): Cookie? {
         val cookies: Array<Cookie> = request.cookies
-        if (cookies.isNotEmpty()) {
-            for (cookie in cookies) {
-                if (cookie.name.equals(name)) {
-                    return cookie
-                }
-            }
-        }
-        return null
+        return cookies.firstOrNull { it.name == name }
     }
 
     fun addCookie(response: HttpServletResponse, name: String, value: String, maxAge: Int) {
-        val cookie = Cookie(name, value)
-        cookie.path = "/"
-        cookie.isHttpOnly = true
-        cookie.maxAge = maxAge
-        response.addCookie(cookie)
+        Cookie(name, value).run {
+            this.path = "/"
+            this.isHttpOnly = true
+            this.maxAge = maxAge
+            response.addCookie(this)
+        }
     }
 
     fun deleteCookie(request: HttpServletRequest, response: HttpServletResponse, name: String) {
-        val cookies: Array<Cookie> = request.cookies
-        if (cookies.isNotEmpty()) {
-            for (cookie in cookies) {
-                if (cookie.name.equals(name)) {
-                    cookie.value = ""
-                    cookie.path = "/"
-                    cookie.maxAge = 0
-                    response.addCookie(cookie)
-                }
-            }
+        request.cookies.firstOrNull { it.name == name }?.run {
+            this.value = ""
+            this.path = "/"
+            this.maxAge = 0
+            response.addCookie(this)
         }
     }
 
