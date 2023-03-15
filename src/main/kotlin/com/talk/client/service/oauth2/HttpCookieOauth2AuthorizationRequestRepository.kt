@@ -12,6 +12,7 @@ class HttpCookieOauth2AuthorizationRequestRepository : AuthorizationRequestRepos
 
     private val authorizationRequestName = HttpCookieOauth2AuthorizationRequestRepository::class.java
             .name + ".AUTHORIZATION_REQUEST"
+    private val redirectUriName = "redirect_uri"
 
     private val maxAge = 180
 
@@ -35,6 +36,10 @@ class HttpCookieOauth2AuthorizationRequestRepository : AuthorizationRequestRepos
         Assert.hasText(state, "authorizationRequest.state cannot be empty")
         val authorizationRequestSerializer = CookieUtils.serialize(authorizationRequest)
         CookieUtils.addCookie(response, authorizationRequestName, authorizationRequestSerializer, maxAge)
+        val redirectUri = request.getParameter(redirectUriName)
+        if (!redirectUri.isNullOrBlank()) {
+            CookieUtils.addCookie(response, redirectUriName, redirectUri, maxAge)
+        }
     }
 
     override fun removeAuthorizationRequest(request: HttpServletRequest, response: HttpServletResponse): OAuth2AuthorizationRequest? {
@@ -42,6 +47,7 @@ class HttpCookieOauth2AuthorizationRequestRepository : AuthorizationRequestRepos
         val authorizationRequest = loadAuthorizationRequest(request)
         if (authorizationRequest != null) {
             CookieUtils.deleteCookie(request, response, authorizationRequestName)
+            CookieUtils.deleteCookie(request, response, redirectUriName)
         }
         return authorizationRequest
     }
