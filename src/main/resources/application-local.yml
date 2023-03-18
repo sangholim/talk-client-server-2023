@@ -9,7 +9,7 @@ spring:
           sso: # registrationId
             client-id: chat-client
             client-secret: chat-secret
-            clientAuthenticationMethod: client_secret_basic
+            clientAuthenticationMethod: client_secret_post
             authorizationGrantType: authorization_code
             redirectUri: http://talk-client-server:8080/login/oauth2/code/sso
             scope:
