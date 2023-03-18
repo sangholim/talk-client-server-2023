@@ -17,6 +17,7 @@ services:
       SPRING_DATA_REDIS_HOST: redis
       SPRING_DATA_REDIS_PORT: 6379
       SPRING_DATA_REDIS_PASSWORD: redis
+      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KAKAO_REDIRECTURI: http://auth-server:9090/login/oauth2/code/kakao
     # 볼륨 설정
     volumes:
       - ./data/authorization/:/data
