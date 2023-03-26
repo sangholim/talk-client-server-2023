@@ -2,6 +2,7 @@ package com.talk.client.service.config
 
 import com.talk.client.service.oauth2.HttpCookieOauth2AuthorizationRequestRepository
 import com.talk.client.service.oauth2.Oauth2AuthenticationEntryPoint
+import com.talk.client.service.token.CustomBearerTokenResolver
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientManager
@@ -46,4 +47,8 @@ class Oauth2Config {
     @Bean
     fun authenticationEntryPoint(): Oauth2AuthenticationEntryPoint =
             Oauth2AuthenticationEntryPoint()
+
+    @Bean
+    fun customBearerTokenResolver(): CustomBearerTokenResolver =
+            CustomBearerTokenResolver()
 }
