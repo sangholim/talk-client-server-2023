@@ -15,10 +15,10 @@ class Oauth2Controller {
         val accessToken = authorizedClient.accessToken
         val refreshToken = authorizedClient.refreshToken
         accessToken?.run {
-            CookieUtils.addCookie(response, "accessToken", this.tokenValue, this.maxAge())
+            CookieUtils.addCookie(response, Oauth2Constant.ACCESS_TOKEN, this.tokenValue, this.maxAge())
         }
         refreshToken?.run {
-            CookieUtils.addCookie(response, "refreshToken", this.tokenValue, this.maxAge())
+            CookieUtils.addCookie(response, Oauth2Constant.REFRESH_TOKEN, this.tokenValue, this.maxAge())
         }
 
         return "index"
