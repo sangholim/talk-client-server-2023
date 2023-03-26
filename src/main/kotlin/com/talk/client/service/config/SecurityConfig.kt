@@ -26,7 +26,7 @@ class SecurityConfig(
         }
         http.formLogin().disable()
         http.authorizeHttpRequests {
-            it.requestMatchers("/oauth2/login").permitAll()
+            it.requestMatchers("/", "/oauth2/login").permitAll()
             it.anyRequest().authenticated()
         }
          http.oauth2ResourceServer().jwt()
