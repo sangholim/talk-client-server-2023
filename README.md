@@ -1,2 +1,2 @@
 # talk-client-server-2023
-유저간 대화를 제공하는 서버입니다
+- talk 클라이언트 서버
