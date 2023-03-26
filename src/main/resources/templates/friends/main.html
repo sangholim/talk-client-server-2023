@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,6 +13,11 @@
             <div class="card-body">
                 <h5 class="card-title">friends</h5>
                 <p class="card-text">로그인후 기본 화면 입니다</p>
+            </div>
+            <div class="card-body">
+                <form th:action="@{/logout}" th:method="post">
+                    <button type="submit" class="btn btn-primary">로그아웃</button>
+                </form>
             </div>
         </div>
     </div>
