@@ -23,6 +23,6 @@ class Oauth2Controller {
         refreshToken?.run {
             CookieUtils.addCookie(response, Oauth2Constant.REFRESH_TOKEN, this.tokenValue, this.maxAge())
         }
-        return "redirect:${Oauth2Constant.SUCCESS_RUL}"
+        return "redirect:${Oauth2Constant.SUCCESS_URL}"
     }
 }
