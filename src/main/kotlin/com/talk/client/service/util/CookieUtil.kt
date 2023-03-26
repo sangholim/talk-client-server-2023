@@ -9,7 +9,7 @@ import java.util.*
 
 object CookieUtils {
     fun getCookie(request: HttpServletRequest, name: String): Cookie? {
-        val cookies: Array<Cookie> = request.cookies
+        val cookies: Array<Cookie> = request.cookies ?: return null
         return cookies.firstOrNull { it.name == name }
     }
 
