@@ -26,6 +26,13 @@ spring:
             userInfoUri: http://auth-server:9090/connect/v1/userinfo
             jwkSetUri: http://auth-server:9090/oauth2/v1/jwks
             userNameAttribute: sub
+  thymeleaf:
+    suffix: .html
+    mode: HTML
+    cache: false
+    check-template: false
+    encoding: UTF-8
+    template-resolver-order: 1
 
 logging:
   level:
