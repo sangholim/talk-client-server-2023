@@ -18,7 +18,7 @@ class SecurityConfig(
 ) {
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        //http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         http.oauth2Client { oauth2Client ->
             oauth2Client.authorizationCodeGrant().authorizationRequestRepository(httpCookieOauth2AuthorizationRequestRepository)
         }
