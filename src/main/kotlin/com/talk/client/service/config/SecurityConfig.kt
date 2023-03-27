@@ -3,22 +3,24 @@ package com.talk.client.service.config
 import com.talk.client.service.oauth2.HttpCookieOauth2AuthorizationRequestRepository
 import com.talk.client.service.oauth2.Oauth2AuthenticationEntryPoint
 import com.talk.client.service.oauth2.Oauth2Constant
+import com.talk.client.service.oauth2.Oauth2SsoLogoutHandler
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
-import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.web.SecurityFilterChain
 
 @Configuration
 @EnableWebSecurity
 class SecurityConfig(
         private val httpCookieOauth2AuthorizationRequestRepository: HttpCookieOauth2AuthorizationRequestRepository,
-        private val authenticationEntryPoint: Oauth2AuthenticationEntryPoint
+        private val authenticationEntryPoint: Oauth2AuthenticationEntryPoint,
+        private val oauth2SsoLogoutHandler: Oauth2SsoLogoutHandler
 ) {
+    val cookies = listOf(Oauth2Constant.REDIRECT_URI_REQUEST_NAME, Oauth2Constant.AUTHORIZATION_REQUEST_NAME)
+
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
-        //http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         http.oauth2Client { oauth2Client ->
             oauth2Client.authorizationCodeGrant().authorizationRequestRepository(httpCookieOauth2AuthorizationRequestRepository)
         }
@@ -31,9 +33,10 @@ class SecurityConfig(
         http.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
 
         http.logout()
+                .addLogoutHandler(oauth2SsoLogoutHandler)
                 .clearAuthentication(true)
                 .invalidateHttpSession(true)
-                .deleteCookies(Oauth2Constant.ACCESS_TOKEN, Oauth2Constant.REFRESH_TOKEN, "JSESSIONID")
+                .deleteCookies(*cookies.toTypedArray())
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/")
         return http.build()
