@@ -10,9 +10,9 @@ import org.springframework.util.Assert
 
 class HttpCookieOauth2AuthorizationRequestRepository : AuthorizationRequestRepository<OAuth2AuthorizationRequest> {
 
-    private val authorizationRequestName = HttpCookieOauth2AuthorizationRequestRepository::class.java
-            .name + ".AUTHORIZATION_REQUEST"
-    private val redirectUriName = "redirect_uri"
+    private val authorizationRequestName = Oauth2Constant.AUTHORIZATION_REQUEST_NAME
+
+    private val redirectUriName = Oauth2Constant.REDIRECT_URI_REQUEST_NAME
 
     private val maxAge = 180
 
