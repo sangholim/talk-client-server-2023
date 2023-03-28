@@ -2,6 +2,8 @@ package com.talk.client.service.config
 
 import com.talk.client.service.oauth2.HttpCookieOauth2AuthorizationRequestRepository
 import com.talk.client.service.oauth2.Oauth2AuthenticationEntryPoint
+import com.talk.client.service.oauth2.Oauth2Service
+import com.talk.client.service.oauth2.Oauth2SsoLogoutHandler
 import com.talk.client.service.token.CustomBearerTokenResolver
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -51,4 +53,8 @@ class Oauth2Config {
     @Bean
     fun customBearerTokenResolver(): CustomBearerTokenResolver =
             CustomBearerTokenResolver()
+
+    @Bean
+    fun oauth2SsoLogoutHandler(oauth2Service: Oauth2Service, clientRegistrationRepository: ClientRegistrationRepository): Oauth2SsoLogoutHandler =
+            Oauth2SsoLogoutHandler(oauth2Service, clientRegistrationRepository)
 }

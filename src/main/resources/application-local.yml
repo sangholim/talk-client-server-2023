@@ -21,6 +21,7 @@ spring:
             clientName: sign in sso
         provider:
           sso:
+            issuerUri: http://auth-server:9090
             authorizationUri: http://auth-server:9090/oauth2/v1/authorize
             tokenUri: http://auth-server:9090/oauth2/v1/token
             userInfoUri: http://auth-server:9090/connect/v1/userinfo

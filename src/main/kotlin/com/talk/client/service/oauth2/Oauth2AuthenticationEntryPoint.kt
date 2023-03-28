@@ -7,6 +7,6 @@ import org.springframework.security.web.AuthenticationEntryPoint
 
 class Oauth2AuthenticationEntryPoint: AuthenticationEntryPoint {
     override fun commence(request: HttpServletRequest, response: HttpServletResponse, authException: AuthenticationException) {
-        response.sendRedirect(Oauth2Constant.LOGIN_URL)
+        response.sendRedirect("/")
     }
 }
