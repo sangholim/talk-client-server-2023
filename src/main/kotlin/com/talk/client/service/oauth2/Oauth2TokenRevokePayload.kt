@@ -6,9 +6,6 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 data class Oauth2TokenRevokePayload(
         val token: String,
 
-        @field:JsonProperty(value = "token_type_hint")
-        val tokenTypeHint: String,
-
         @field:JsonProperty(value = "client_id")
         val clientId: String,
 
@@ -16,22 +13,11 @@ data class Oauth2TokenRevokePayload(
         val clientSecret: String
 ) {
     companion object {
-        fun accessTokenOf(token: String, clientRegistration: ClientRegistration): Oauth2TokenRevokePayload =
+        fun of(token: String, clientRegistration: ClientRegistration): Oauth2TokenRevokePayload =
                 Oauth2TokenRevokePayload(
                         token = token,
-                        tokenTypeHint = Oauth2Constant.ACCESS_TOKEN,
                         clientId = clientRegistration.clientId,
                         clientSecret = clientRegistration.clientSecret
                 )
-
-        fun refreshTokenOf(token: String?, clientRegistration: ClientRegistration): Oauth2TokenRevokePayload? {
-            if (token == null) return null
-            return Oauth2TokenRevokePayload(
-                    token = token,
-                    tokenTypeHint = Oauth2Constant.ACCESS_TOKEN,
-                    clientId = clientRegistration.clientId,
-                    clientSecret = clientRegistration.clientSecret
-            )
-        }
     }
 }
