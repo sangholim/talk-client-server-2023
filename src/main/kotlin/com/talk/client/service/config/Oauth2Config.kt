@@ -55,6 +55,6 @@ class Oauth2Config {
             CustomBearerTokenResolver()
 
     @Bean
-    fun oauth2SsoLogoutHandler(oauth2Service: Oauth2Service, authorizedClientRepository: OAuth2AuthorizedClientRepository): Oauth2SsoLogoutHandler =
-            Oauth2SsoLogoutHandler(oauth2Service, authorizedClientRepository)
+    fun oauth2SsoLogoutHandler(oauth2Service: Oauth2Service, clientRegistrationRepository: ClientRegistrationRepository): Oauth2SsoLogoutHandler =
+            Oauth2SsoLogoutHandler(oauth2Service, clientRegistrationRepository)
 }
