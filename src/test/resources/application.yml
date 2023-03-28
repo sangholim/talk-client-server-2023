@@ -1,0 +1,12 @@
+spring:
+  profiles:
+    include:
+      - test
+server:
+  error:
+    whitelabel:
+      enabled: false
+
+logging:
+  level:
+    root: INFO
