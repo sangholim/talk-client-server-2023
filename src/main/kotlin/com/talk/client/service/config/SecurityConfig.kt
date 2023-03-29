@@ -7,7 +7,9 @@ import com.talk.client.service.oauth2.Oauth2SsoLogoutHandler
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
+import org.springframework.security.config.annotation.web.builders.WebSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.savedrequest.CookieRequestCache
@@ -20,6 +22,11 @@ class SecurityConfig(
         private val oauth2SsoLogoutHandler: Oauth2SsoLogoutHandler
 ) {
     val cookies = listOf(Oauth2Constant.REDIRECT_URI_REQUEST_NAME, Oauth2Constant.AUTHORIZATION_REQUEST_NAME)
+
+    @Bean
+    fun webSecurityCustomizer(): WebSecurityCustomizer {
+        return WebSecurityCustomizer { web: WebSecurity -> web.ignoring().requestMatchers("/css/**", "/images/**") }
+    }
 
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
