@@ -23,6 +23,22 @@ services:
     volumes:
       - ./data/authorization/:/data
   # 서비스 명
+  member-service:
+    # 사용할 이미지
+    image: hybriddevslim/member-service-2023:latest
+    restart: always
+    expose:
+      - "8080"
+    environment:
+      SPRING_R2DBC_URL: r2dbc:postgresql://root:password@postgresql:5432/member_service
+      SPRING_FLYWAY_URL: jdbc:postgresql://postgresql:5432/member_service
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_OPAQUETOKEN_INTROSPECTION-URI: http://auth-server:9090/oauth2/v1/introspect
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_OPAQUETOKEN_CLIENT_ID: internal-client
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_OPAQUETOKEN_CLIENT_SECRET: internal-client-secret
+    # 볼륨 설정
+    volumes:
+      - ./data/member_service/:/data
+  # 서비스 명
   postgresql:
     # 사용할 이미지
     image: postgres:latest
@@ -36,10 +52,10 @@ services:
       # PostgreSQL 계정 및 패스워드 설정 옵션
       POSTGRES_USER: root
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: authorization
     # 볼륨 설정
     volumes:
       - ./data/postgres/:/var/lib/postgresql/data
+      - ./docker-compose/postgresql/:/docker-entrypoint-initdb.d
   redis:
     image: redis:latest
     restart: always
@@ -49,3 +65,9 @@ services:
       - ./data/redis/:/data
       - ./conf/redis.conf:/usr/local/conf/redis.conf
     command: redis-server /usr/local/conf/redis.conf
+  nginx:
+    image: "nginx"
+    ports:
+      - "5002:80"
+    volumes:
+      - ./docker-compose/nginx/nginx.conf:/etc/nginx/nginx.conf
