@@ -17,7 +17,8 @@ import org.springframework.web.reactive.function.client.WebClient
         MockkBean(Oauth2Service::class, relaxed = true),
         MockkBean(OAuth2AuthorizedClientManager::class, relaxUnitFun = true),
         MockkBean(Oauth2SsoLogoutHandler::class, relaxUnitFun = true),
-        MockkBean(WebClient::class, relaxUnitFun = true)
+        MockkBean(name = "oauth2Client", classes = [WebClient::class], relaxUnitFun = true),
+        MockkBean(name = "resourceClient", classes = [WebClient::class], relaxUnitFun = true)
 )
 @SpringBootTest
 class ServiceApplicationTests {
