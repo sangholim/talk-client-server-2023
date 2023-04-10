@@ -35,7 +35,7 @@ class Oauth2Config {
     }
 
     @Bean
-    fun webClient(authorizedClientManager: OAuth2AuthorizedClientManager): WebClient {
+    fun oauth2Client(authorizedClientManager: OAuth2AuthorizedClientManager): WebClient {
         val oauth2Client = ServletOAuth2AuthorizedClientExchangeFilterFunction(authorizedClientManager)
         return WebClient.builder()
                 .apply(oauth2Client.oauth2Configuration())
