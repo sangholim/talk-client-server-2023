@@ -2,23 +2,25 @@
 version: "3"
 services:
   # 서비스 명
-  authrization:
+  authorization-service:
     # 사용할 이미지
     image: hybriddevslim/authorization-server-2023:latest
     # 컨테이너 실행 시 재시작
     restart: always
     # 접근 포트 설정 (컨테이너 외부:컨테이너 내부)
-    ports:
-      - "9090:9090"
+    expose:
+      - "9090"
     environment:
+      SERVER_FORWARD_HEADERS_STRATEGY: NATIVE
+      SERVER_SERVLET_CONTEXT_PATH: /authorization-service
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql:5432/authorization
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: password
       SPRING_DATA_REDIS_HOST: redis
       SPRING_DATA_REDIS_PORT: 6379
       SPRING_DATA_REDIS_PASSWORD: redis
-      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KAKAO_REDIRECTURI: http://auth-server:9090/login/oauth2/code/kakao
-      AUTHORIZATION.ISSUER: http://auth-server:9090
+      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KAKAO_REDIRECTURI: http://resource-service:5002/authorization-service/login/oauth2/code/kakao
+      AUTHORIZATION.ISSUER: http://resource-service:5002/authorization-service
     # 볼륨 설정
     volumes:
       - ./data/authorization/:/data
@@ -67,6 +69,7 @@ services:
     command: redis-server /usr/local/conf/redis.conf
   nginx:
     image: "nginx"
+    restart: always
     ports:
       - "5002:80"
     volumes:
