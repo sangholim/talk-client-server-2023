@@ -6,8 +6,8 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://auth-server:9090
-          jwk-set-uri: http://auth-server:9090/oauth2/v1/jwks
+          issuer-uri: http://resource-service:5002/authorization-service
+          jwk-set-uri: http://resource-service:5002/authorization-service/oauth2/v1/jwks
       client:
         registration:
           sso: # registrationId
@@ -21,11 +21,11 @@ spring:
             clientName: sign in sso
         provider:
           sso:
-            issuerUri: http://auth-server:9090
-            authorizationUri: http://auth-server:9090/oauth2/v1/authorize
-            tokenUri: http://auth-server:9090/oauth2/v1/token
-            userInfoUri: http://auth-server:9090/connect/v1/userinfo
-            jwkSetUri: http://auth-server:9090/oauth2/v1/jwks
+            issuerUri: http://resource-service:5002/authorization-service
+            authorizationUri: http://resource-service:5002/authorization-service/oauth2/v1/authorize
+            tokenUri: http://resource-service:5002/authorization-service/oauth2/v1/token
+            userInfoUri: http://resource-service:5002/authorization-service/connect/v1/userinfo
+            jwkSetUri: http://resource-service:5002/authorization-service/oauth2/v1/jwks
             userNameAttribute: sub
   thymeleaf:
     suffix: .html
