@@ -35,6 +35,9 @@ spring:
     encoding: UTF-8
     template-resolver-order: 1
 
+resource-client:
+  baseUrl: http://resource-server:5002
+
 logging:
   level:
     root: INFO
