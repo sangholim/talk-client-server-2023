@@ -36,7 +36,7 @@ spring:
     template-resolver-order: 1
 
 resource-client:
-  baseUrl: http://resource-server:5002
+  baseUrl: http://resource-service:5002
 
 logging:
   level:

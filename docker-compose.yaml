@@ -32,9 +32,10 @@ services:
     expose:
       - "8080"
     environment:
+      SPRING_PROFILES_ACTIVE: local
       SPRING_R2DBC_URL: r2dbc:postgresql://root:password@postgresql:5432/member_service
       SPRING_FLYWAY_URL: jdbc:postgresql://postgresql:5432/member_service
-      SPRING_SECURITY_OAUTH2_RESOURCESERVER_OPAQUETOKEN_INTROSPECTION-URI: http://auth-server:9090/oauth2/v1/introspect
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_OPAQUETOKEN_INTROSPECTION-URI: http://authorization-service:9090/authorization-service/oauth2/v1/introspect
       SPRING_SECURITY_OAUTH2_RESOURCESERVER_OPAQUETOKEN_CLIENT_ID: internal-client
       SPRING_SECURITY_OAUTH2_RESOURCESERVER_OPAQUETOKEN_CLIENT_SECRET: internal-client-secret
     # 볼륨 설정
