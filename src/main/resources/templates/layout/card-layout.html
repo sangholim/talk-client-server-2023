@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:replace="head/head::head"></head>
+<th:block layout:fragment="script">
+    <!--
+    script 추가해 주세요
+    -->
+</th:block>
+<body>
+<div class="container-fluid min-vh-100 d-flex flex-column" style="max-width: 540px">
+    <div class="row flex-grow-1">
+        <div class="card vh-100 p-5">
+            <th:block layout:fragment="card-header">
+                카드 헤더
+            </th:block>
+            <th:block layout:fragment="card-body">
+                카드 바디
+            </th:block>
+        </div>
+    </div>
+</div>
+</body>
