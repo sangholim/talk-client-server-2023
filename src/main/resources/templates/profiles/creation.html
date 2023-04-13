@@ -1,35 +1,33 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head th:replace="head/head::head"></head>
-<body>
-<div class="container-sm vh-100" style="max-width: 540px">
-    <div class="row">
-        <div class="col vh-100">
-            <div class="card h-100 p-5" style=" background-color: #FCFF33">
-                <div class="h-25">
-                    <img class="card-img-top pt-5" src="/images/main/logo.png" alt="...">
-                </div>
-                <div class="card-body">
-                    <div class="mb-3 text-center">
-                        <p class="card-text p-3 bg-white border">프로필 설정하기</p>
-                    </div>
-                    <form class="border" th:action="@{/profiles/creation}" method="post" style="background-color: ghostwhite;">
-                        <div class="mb-3 p-3 text-start">
-                            <label for="email" class="form-label">📨이메일</label>
-                            <input type="email" class="form-control" id="email" name="email" th:value="${email}" placeholder="name@example.com" readonly>
-                        </div>
-                        <div class="mb-3 p-3 text-start">
-                            <label for="name" class="form-label">📛이름</label>
-                            <input type="name" class="form-control" id="name" name="name" placeholder="3~5자를 입력해 주세요">
-                        </div>
-                        <div class="mb-3 p-3 text-center">
-                            <button type="submit" class="btn border" style="background-color: #FCFF33;">설정하기</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout/card-layout}">
+<th:block layout:fragment="script">
+    <script type="text/javascript">
+        window.addEventListener('DOMContentLoaded', function(){
+            document.querySelector(".card").style.backgroundColor="#FCFF33";
+            document.querySelector(".form").style.backgroundColor="ghostwhite";
+            document.querySelector(".btn").style.backgroundColor="#FCFF33";
+        })
+    </script>
+</th:block>
+
+<div layout:fragment="card-header" class="h-25">
+    <img class="card-img-top pt-5" src="/images/main/logo.png" alt="...">
 </div>
-</body>
-</html>
+<div layout:fragment="card-body" class="card-body">
+    <div class="mb-3 text-center">
+        <p class="card-text p-3 bg-white border">프로필 설정하기</p>
+    </div>
+    <form class="form border" th:action="@{/profiles/creation}" method="post">
+        <div class="mb-3 p-3 text-start">
+            <label for="email" class="form-label">📨이메일</label>
+            <input type="email" class="form-control" id="email" name="email" th:value="${email}" placeholder="name@example.com" readonly>
+        </div>
+        <div class="mb-3 p-3 text-start">
+            <label for="name" class="form-label">📛이름</label>
+            <input type="name" class="form-control" id="name" name="name" placeholder="3~5자를 입력해 주세요">
+        </div>
+        <div class="mb-3 p-3 text-center">
+            <button type="submit" class="btn border">설정하기</button>
+        </div>
+    </form>
+</div>
