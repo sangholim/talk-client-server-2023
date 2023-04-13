@@ -10,6 +10,15 @@ import reactor.core.publisher.Mono
 class ProfileClient(
         private val resourceClient: WebClient
 ) {
+    fun create(token: String, payload: ProfileCreationPayload) = resourceClient.post().uri("/member-service/profiles")
+            .headers {
+                it.setBearerAuth(token)
+            }
+            .bodyValue(payload)
+            .retrieve()
+            .toBodilessEntity()
+            .block()
+
     fun get(token: String): ProfileView? = resourceClient.get().uri("/member-service/profiles")
             .headers {
                 it.setBearerAuth(token)
