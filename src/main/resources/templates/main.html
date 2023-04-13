@@ -1,21 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head th:replace="head/head::head"></head>
-<body>
-    <div class="container-sm vh-100" style="max-width: 540px">
-        <div class="row">
-            <div class="col vh-100">
-                <div class="card text-center h-100 p-5" style=" background-color: #FCFF33">
-                    <div class="h-50">
-                        <img class="card-img-top pt-5" src="images/main/logo.png" alt="...">
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text p-3 bg-white border">채팅을 이용할수 있는 서비스 입니다</p>
-                        <a class="btn btn-light p-3 d-block" style="color: #666664" href="/oauth2/login">로그인 하기</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout/card-layout}">
+<th:block layout:fragment="script">
+    <script type="text/javascript">
+        window.addEventListener('DOMContentLoaded', function(){
+            document.querySelector(".card").style.backgroundColor="#FCFF33";
+            document.querySelector(".btn").style.color="#666664";
+        })
+    </script>
+</th:block>
+
+<div layout:fragment="card-header" class="h-50">
+    <img class="card-img-top pt-5" src="/images/main/logo.png" alt="...">
+</div>
+<div layout:fragment="card-body" class="card-body text-center">
+    <p class="card-text p-3 bg-white border">채팅을 이용할수 있는 서비스 입니다</p>
+    <a class="btn btn-light p-3 d-block" href="/oauth2/login">로그인 하기</a>
+</div>
