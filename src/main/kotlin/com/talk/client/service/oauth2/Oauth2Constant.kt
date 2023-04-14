@@ -1,7 +1,7 @@
 package com.talk.client.service.oauth2
 
 object Oauth2Constant {
-    const val SUCCESS_URL = "/profiles/friends"
+    const val SUCCESS_URL = "/friends"
     const val ACCESS_TOKEN = "access_token"
     const val REFRESH_TOKEN = "refresh_token"
     const val REDIRECT_URI_REQUEST_NAME = "redirect_uri"
