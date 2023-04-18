@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout/grid-layout}">
+<div layout:fragment="menu">
+    <th:block th:insert="/friends/menu::menu"></th:block>
+</div>
 <div layout:fragment="content">
     친구 컨텐츠
 </div>
