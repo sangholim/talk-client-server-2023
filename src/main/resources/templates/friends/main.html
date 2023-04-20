@@ -7,6 +7,18 @@
     <th:block th:insert="/friends/menu::menu"></th:block>
 </div>
 <div layout:fragment="content">
-    친구 컨텐츠
+    <div class="row row-col-2 mt-2">
+        <div class="col-2">
+            <div class="row h-100">
+                <div class="d-flex justify-content-center align-items-center">
+                    <img src="/images/friends/user.png" alt="..." style="max-height: 60px">
+                </div>
+            </div>
+        </div>
+        <div class="col-10">
+            <div class="row" style="font-size: 1.5rem;" th:text="${profile.email}"></div>
+            <div class="row" style="font-size: 0.8rem; color:grey" th:text="${profile.name}"></div>
+        </div>
+    </div>
 </div>
 </html>
