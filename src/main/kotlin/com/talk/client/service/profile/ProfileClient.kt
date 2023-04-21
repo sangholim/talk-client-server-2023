@@ -19,8 +19,12 @@ class ProfileClient(
             .toBodilessEntity()
             .block()
 
-    fun get(token: String): ProfileView? = resourceClient.get().uri("/member-service/profiles")
-            .headers {
+    fun get(token: String): ProfileView? = resourceClient.get()
+            .uri { builder ->
+                builder.queryParam("containFriend", true)
+                builder.path("/member-service/profiles")
+                builder.build()
+            }.headers {
                 it.setBearerAuth(token)
             }
             .retrieve()
