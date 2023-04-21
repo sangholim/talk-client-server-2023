@@ -1,0 +1,37 @@
+<th:block th:fragment="insert">
+    <div class="modal fade" id="insert" tabindex="-1" role="dialog" aria-labelledby="friend-insert" aria-hidden="true">
+        <div class="modal-dialog h-50" style="max-width:400px">
+            <div class="modal-content h-100">
+                <div class="modal-header justify-content-center">
+                    <h5 class="modal-title" id="friend-insert" style="font-size: 1.5rem;">친구 추가</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row row-col-2 text-center">
+                        <div class="col m-2 border-dark border-2 border-bottom">
+                            <div style="font-size: 1.2rem;">이메일</div>
+                        </div>
+                        <div class="col m-2 border-dark border-2 border-bottom">
+                            <div style="font-size: 1.2rem;">이름(TODO)</div>
+                        </div>
+                    </div>
+                    <div class="row m-2">
+                        <form>
+                            <div class="mt-2 mb-2">
+                                <input type="text" class="form-control-plaintext border-bottom" id="friend-name" placeholder="이름">
+                            </div>
+                            <div class="mt-2 mb-2">
+                                <input type="text" class="form-control-plaintext border-bottom" id="friend-email" placeholder="이메일">
+                            </div>
+                            <div class="mt-2 mb-2">
+                                <div style="font-size: 0.8rem;color: gray;">이름과 이메일을 입력하세요</div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"">친구 추가하기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
