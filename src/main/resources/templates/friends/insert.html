@@ -11,25 +11,21 @@
                             <div style="font-size: 1.2rem;">이메일</div>
                         </div>
                         <div class="col m-2 border-dark border-2 border-bottom">
-                            <div style="font-size: 1.2rem;">이름(TODO)</div>
+                            <div style="font-size: 1.2rem;">휴대폰번호(TODO)</div>
                         </div>
                     </div>
                     <div class="row m-2">
-                        <form>
-                            <div class="mt-2 mb-2">
-                                <input type="text" class="form-control-plaintext border-bottom" id="friend-name" placeholder="이름">
-                            </div>
-                            <div class="mt-2 mb-2">
-                                <input type="text" class="form-control-plaintext border-bottom" id="friend-email" placeholder="이메일">
-                            </div>
-                            <div class="mt-2 mb-2">
-                                <div style="font-size: 0.8rem;color: gray;">이름과 이메일을 입력하세요</div>
-                            </div>
-                        </form>
+                        <input type="hidden" name="type" class="form-control-plaintext border-bottom" value="EMAIL">
+                        <div class="mt-2 mb-2">
+                            <input type="text" name="email" class="form-control-plaintext border-bottom" id="friend-email" placeholder="이메일">
+                        </div>
+                        <div class="mt-2 mb-2">
+                            <div style="font-size: 0.8rem;color: gray;">이메일을 입력하세요</div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary">친구 추가하기</button>
+                    <button type="button" id="friend-insert-button" class="btn btn-secondary">친구 추가하기</button>
                 </div>
             </div>
         </div>
