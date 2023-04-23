@@ -6,10 +6,15 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class FriendRestController {
-
-    @PostMapping(value = ["/friends"])
-    fun insert(authentication: JwtAuthenticationToken, @RequestBody payload: FriendCreationPayload) {
+class FriendRestController(
+        private val client: FriendClient
+) {
+    /**
+     * resource 서버로 친구 생성 요청
+     */
+    @PostMapping(value = ["/api/friends"])
+    fun insert(authentication: JwtAuthenticationToken, @RequestBody payload: FriendCreationPayload): FriendView? {
+        return client.create(authentication.token.tokenValue, payload)
     }
 }
 
