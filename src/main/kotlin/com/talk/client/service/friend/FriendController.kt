@@ -23,6 +23,6 @@ class FriendController(
             return "profiles/creation"
         }
         model.addAttribute("profile", profile)
-        return "friends/main"
+        return "friend/main"
     }
 }
