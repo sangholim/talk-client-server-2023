@@ -2,7 +2,7 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout/grid-layout}">
 <div layout:fragment="script">
     <script type="text/javascript" th:src="@{/js/components/spinner.js}"></script>
-    <script type="text/javascript" th:src="@{/js/friends/friend-insert.js}"></script>
+    <script type="text/javascript" th:src="@{/js/friend/friend-insert.js}"></script>
     <script type="text/javascript">
         document.addEventListener("DOMContentLoaded", () => {
             friend.insert.addEvents();
@@ -10,17 +10,17 @@
     </script>
 </div>
 <div layout:fragment="header">
-    <th:block th:insert="/friends/header::header"></th:block>
+    <th:block th:insert="/friend/header::header"></th:block>
 </div>
 <div layout:fragment="menu">
-    <th:block th:insert="/friends/menu::menu"></th:block>
+    <th:block th:insert="/friend/menu::menu"></th:block>
 </div>
 <div layout:fragment="content">
     <div class="row row-col-2 border-bottom">
         <div class="col-2 mt-3 mb-3">
             <div class="row h-100">
                 <div class="d-flex justify-content-center align-items-center">
-                    <img src="/images/friends/user.png" alt="..." style="max-height: 60px">
+                    <img src="/images/friend/user.png" alt="..." style="max-height: 60px">
                 </div>
             </div>
         </div>
@@ -40,7 +40,7 @@
                 <div class="col-2 mt-3 mb-3">
                     <div class="row h-100">
                         <div class="d-flex justify-content-center align-items-center">
-                            <img src="/images/friends/user.png" alt="..." style="max-height: 60px">
+                            <img src="/images/friend/user.png" alt="..." style="max-height: 60px">
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
             </div>
         </th:block>
     </div>
-    <th:block th:insert="/friends/insert::insert"></th:block>
+    <th:block th:insert="/friend/insert::insert"></th:block>
     <th:block th:insert="/components/spinner::components-spinner"></th:block>
 </div>
 </html>
