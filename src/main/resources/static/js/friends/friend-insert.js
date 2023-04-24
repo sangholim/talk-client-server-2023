@@ -41,7 +41,7 @@ const friend = {
                 friend.insert.modifyMessage(responseBody.message);
                 return
             }
-            console.log(responseBody);
+            location.replace(location.href);
         },
         modifyMessage: function(text) {
             var message = document.getElementById(`${this.messageId}`);
