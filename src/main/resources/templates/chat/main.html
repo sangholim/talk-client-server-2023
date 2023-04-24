@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout/grid-layout}">
+<div layout:fragment="script">
+
+</div>
+<div layout:fragment="header">
+    헤더
+</div>
+<div layout:fragment="menu">
+    <th:block th:insert="/menu/menu::menu"></th:block>
+</div>
+<div layout:fragment="content">
+    채팅방 리스트
+</div>
+</html>

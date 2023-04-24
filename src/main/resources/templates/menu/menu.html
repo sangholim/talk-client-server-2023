@@ -1,12 +1,8 @@
-<div th:fragment="menu">
-  <div class="row">
-    <span class="d-inline-block text-truncate">
-      친구
-    </span>
+<th:block th:fragment="menu">
+  <div class="mt-3 fs-1" th:onclick="|location.href='@{/friends}'|">
+    👤
   </div>
-  <div class="row">
-    <span class="d-inline-block text-truncate">
-      채팅방
-    </span>
+  <div class="mt-3 fs-1" th:onclick="|location.href='@{/chats}'|">
+    🗨️
   </div>
-</div>
+</th:block>
