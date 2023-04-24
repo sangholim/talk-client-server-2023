@@ -20,7 +20,7 @@ class FriendController(
         val profile = profileClient.get(authentication.token.tokenValue)
         if (profile == null) {
             model.addAttribute("email", authentication.tokenAttributes["email"])
-            return "profiles/creation"
+            return "profile/creation"
         }
         model.addAttribute("profile", profile)
         return "friend/main"
