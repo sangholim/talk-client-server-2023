@@ -1,8 +1,12 @@
 <th:block th:fragment="insert">
     <div id="chat-insert-popup-friend-container" class="d-none container-fluid d-flex flex-column" style="width:200px">
     </div>
-
-    <div id="chat-insert-popup-friend-template" class="row row-col-2 d-none">
+    <div id="chat-insert-popup-message-template" class="row row-col-3 d-none">
+        <p class="text-start text-danger fw-bold">
+            예상치 못한 문제가 발생하였습니다.
+        </p>
+    </div>
+    <div id="chat-insert-popup-friend-template" class="row row-col-3 d-none">
         <div class="col-2 mt-3 mb-3">
             <div class="row">
                 <div class="p-0">
@@ -10,15 +14,20 @@
                 </div>
             </div>
         </div>
-        <div class="col-10 mt-3 mb-3 align-self-center">
-            <div id="friend-name" class="row" style="overflow: hidden;">친구 이름</div>
+        <div class="col-8 mt-3 mb-3 align-self-center">
+            <div class="friend-name row">친구 이름</div>
+        </div>
+        <div class="col-2 align-self-center">
+            <div class="row">
+                <input name="friend-id" type="checkbox">
+            </div>
         </div>
     </div>
     <div id="chat-insert-popup-button-template" class="row row-col-2 d-none">
-        <div class="col">
+        <div class="col mt-3">
             <input type="button" id="chat-friends-cancel-button" class="w-100 btn btn-secondary" value="취소">
         </div>
-        <div class="col">
+        <div class="col mt-3">
             <input type="button" id="chat-friends-insert-button" class="w-100 btn btn-secondary" value="확인">
         </div>
     </div>
