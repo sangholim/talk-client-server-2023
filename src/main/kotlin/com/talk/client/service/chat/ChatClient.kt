@@ -16,4 +16,11 @@ class ChatClient(
             }.retrieve()
             .bodyToMono(object : ParameterizedTypeReference<List<ChatView>>() {})
             .block()
+
+    fun create(token: String, payload: ChatCreationPayload) = resourceClient.post()
+            .uri("/member-service/profile/chats")
+            .headers {
+                it.setBearerAuth(token)
+            }.bodyValue(payload).retrieve()
+            .toBodilessEntity().block()
 }
