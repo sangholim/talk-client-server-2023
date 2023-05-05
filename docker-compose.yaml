@@ -42,6 +42,18 @@ services:
     volumes:
       - ./data/member_service/:/data
   # 서비스 명
+  message-service:
+    # 사용할 이미지
+    image: hybriddevslim/message-service-2023:latest
+    restart: always
+    expose:
+      - "8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+    # 볼륨 설정
+    volumes:
+      - ./data/message_service/:/data
+  # 서비스 명
   postgresql:
     # 사용할 이미지
     image: postgres:latest
