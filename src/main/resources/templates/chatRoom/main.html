@@ -22,14 +22,19 @@
     <th:block th:insert="/menu/menu::menu"></th:block>
 </div>
 <div layout:fragment="content">
-    <!-- 수신받을 메시지가 노출될 div -->
-    <div id="message-view"></div>
-    <div id="message-send-form" class="row row-col-2">
-        <div class="col">
-            <textarea class="form-control" rows="2"></textarea>
+    <div class="row h-100 d-flex flex-column">
+        <div id="message-view" class="row flex-grow-1">
+            <div class="col">
+
+            </div>
         </div>
-        <div class="col-2">
-            <button class="btn btn-primary h-100">전송</button>
+        <div id="message-send-form" class="row row-col-2">
+            <div class="col">
+                <textarea class="form-control" rows="2"></textarea>
+            </div>
+            <div class="col-2 m-auto p-0 text-center">
+                <button class="btn btn-primary d-inline-block">전송</button>
+            </div>
         </div>
     </div>
     <th:block th:insert="/chatRoom/message-template::message-template"></th:block>
