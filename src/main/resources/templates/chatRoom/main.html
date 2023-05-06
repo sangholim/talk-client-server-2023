@@ -16,7 +16,7 @@
     </script>
 </div>
 <div layout:fragment="header">
-    <th:block th:insert="/chat/header::header"></th:block>
+    <th:block th:insert="/chatRoom/header::header(${chat})"></th:block>
 </div>
 <div layout:fragment="menu">
     <th:block th:insert="/menu/menu::menu"></th:block>
