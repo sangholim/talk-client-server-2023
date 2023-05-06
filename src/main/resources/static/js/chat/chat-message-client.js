@@ -23,6 +23,16 @@ const chat = {
                 elements.textArea.value = '';
             }
         },
+        viewForm: {
+            insert: (data) => {
+                let messageView = document.querySelector(`#${chat.message.viewId} .col`);
+                let message = document.getElementById(chat.message.templateId).cloneNode(true);
+                message.querySelector(".message-name > .col").textContent = data.name;
+                message.querySelector(".message-content > .col").textContent = data.text;
+                message.classList.remove("d-none");
+                messageView.insertBefore(message, null);
+            }
+        },
         client: {
             getInstance : () => {
                 let instance;
@@ -58,8 +68,12 @@ const chat = {
                     let sendForm = chat.message.sendForm;
                     let elements = sendForm.elements();
                     elements.button.addEventListener("click", function() {
+                        let content = elements.textArea.value;
+                        if(content == '') {
+                            return
+                        }
                         source.onNext({
-                            data: Buffer.from(JSON.stringify({name: "a" , text: elements.textArea.value})),
+                            data: Buffer.from(JSON.stringify({name: "a" , text: content})),
                             metadata: rsocketCore.encodeAndAddWellKnownMetadata(
                                 Buffer.alloc(0),
                                 rsocketCore.MESSAGE_RSOCKET_ROUTING,
@@ -83,13 +97,7 @@ const chat = {
                 if(!view) {
                     return false;
                 }
-
-                let messageView = document.getElementById(chat.message.viewId);
-                let message = document.getElementById(chat.message.templateId).cloneNode(true);
-                message.querySelector(".message-name").textContent = view.name;
-                message.querySelector(".message-content").textContent = view.text;
-                message.classList.remove("d-none");
-                messageView.insertBefore(message, null);
+                chat.message.viewForm.insert(view);
             },
             connect : function() {
                 const rsocketClient = chat.message.client.getInstance();
