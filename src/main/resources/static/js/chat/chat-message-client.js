@@ -27,20 +27,26 @@ const chat = {
             insert: (data) => {
                 let messageView = document.querySelector(`#${chat.message.viewId} .col`);
                 let message = document.getElementById(chat.message.templateId).cloneNode(true);
-                message.querySelector(".message-name > .col").textContent = data.name;
-                message.querySelector(".message-content > .col").textContent = data.text;
+                message.querySelector(".message-name > .col").textContent = data.chatParticipantId;
+                message.querySelector(".message-content > .col").textContent = data.content;
                 message.classList.remove("d-none");
                 messageView.insertBefore(message, null);
             }
         },
         client: {
+            _url: 'ws://resource-service:5002/message-service',
+            _endpoint: '',
+            set endpoint(chatId) {
+                if(!chatId) return false;
+                chat.message.client._endpoint = `stream.chats.${chatId}.message`;
+            },
             getInstance : () => {
                 let instance;
                 function init() {
                     const rsocketClient = new rsocketCore.RSocketClient({
                         transport: new rsocketWebSocketClient(
                             {
-                                url: 'ws://resource-service:5002/message-service',
+                                url: chat.message.client._url,
                             },
                             rsocketCore.BufferEncoders,
                         ),
@@ -59,7 +65,7 @@ const chat = {
                 return instance;
             },
             requestChannelPayload: () => {
-                var endpoint = "stream.chats.a.message";
+                var endpoint = chat.message.client._endpoint;
                 var payload = new rsocketFlowable.Flowable(source => {
                     source.onSubscribe({
                         cancel: () => {},
@@ -73,7 +79,7 @@ const chat = {
                             return
                         }
                         source.onNext({
-                            data: Buffer.from(JSON.stringify({name: "a" , text: content})),
+                            data: Buffer.from(JSON.stringify({chatParticipantId: "a" , content: content})),
                             metadata: rsocketCore.encodeAndAddWellKnownMetadata(
                                 Buffer.alloc(0),
                                 rsocketCore.MESSAGE_RSOCKET_ROUTING,
@@ -104,7 +110,7 @@ const chat = {
 
                 rsocketClient.connect()
                     .then(rsocket => {
-                        var endpoint = "stream.chats.a.message";
+                        var endpoint = chat.message.client._endpoint;
                         var payload = chat.message.client.requestChannelPayload();
 
                         rsocket.requestChannel(payload)
