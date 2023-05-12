@@ -36,6 +36,11 @@ const chat = {
         client: {
             _url: 'ws://resource-service:5002/message-service',
             _endpoint: '',
+            _sender: '',
+            set sender(chatParticipantId) {
+                            if(!chatParticipantId) return false;
+                            chat.message.client._sender = chatParticipantId;
+            },
             set endpoint(chatId) {
                 if(!chatId) return false;
                 chat.message.client._endpoint = `stream.chats.${chatId}.message`;
@@ -79,7 +84,7 @@ const chat = {
                             return
                         }
                         source.onNext({
-                            data: Buffer.from(JSON.stringify({chatParticipantId: "a" , content: content})),
+                            data: Buffer.from(JSON.stringify({chatParticipantId: chat.message.client._sender , content: content})),
                             metadata: rsocketCore.encodeAndAddWellKnownMetadata(
                                 Buffer.alloc(0),
                                 rsocketCore.MESSAGE_RSOCKET_ROUTING,
