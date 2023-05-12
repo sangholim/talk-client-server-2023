@@ -50,6 +50,7 @@ services:
       - "8080"
     environment:
       SPRING_PROFILES_ACTIVE: local
+      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/message_service
     # 볼륨 설정
     volumes:
       - ./data/message_service/:/data
@@ -71,6 +72,29 @@ services:
     volumes:
       - ./data/postgres/:/var/lib/postgresql/data
       - ./docker-compose/postgresql/:/docker-entrypoint-initdb.d
+  # 서비스 명
+  mongo:
+    # 사용할 이미지
+    image: mongo:latest
+    container_name: mongo
+    # 컨테이너 실행 시 재시작
+    restart: always
+    # 접근 포트 설정 (컨테이너 외부:컨테이너 내부)
+    ports:
+      - "27017:27017"
+    # 환경 변수 설정
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]
+    healthcheck:
+      test: test $$(echo "rs.initiate({_id:'rs0',members:[{_id:0,host:\"localhost:27017\"}]}).ok || rs.status().ok" | mongo --port 27017 --quiet) -eq 1
+      interval: 10s
+      start_period: 30s
+    # 볼륨 설정
+    volumes:
+      - ./data/mongo/:/var/lib/mongo/data
+      - ./docker-compose/mongo/replica.sh:/scripts/rs-init.sh
   redis:
     image: redis:latest
     restart: always

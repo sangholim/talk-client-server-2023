@@ -9,10 +9,13 @@
 
     <script type="text/javascript" th:src="@{/js/components/spinner.js}"></script>
     <script type="text/javascript" th:src="@{/js/chat/chat-message-client.js}"></script>
-    <script type="text/javascript">
+    <script th:inline="javascript">
+    /*<![CDATA[*/
         document.addEventListener("DOMContentLoaded", () => {
+            chat.message.client.endpoint = /*[[${chat.id}]]*/;
             chat.message.client.connect();
         });
+    /*]]>*/
     </script>
 </div>
 <div layout:fragment="header">
