@@ -13,7 +13,7 @@ class ChatController(
 
     @GetMapping(value = ["/chats"])
     fun getViews(authentication: JwtAuthenticationToken, model: Model): String {
-        val response = chatClient.getAll(authentication.token.tokenValue)?.map(ChatView::from)
+        val response = chatClient.getAll(authentication.token.tokenValue)
         model.addAttribute("chats", response)
         return "/chat/main"
     }
@@ -21,7 +21,7 @@ class ChatController(
 
     @GetMapping(value = ["/chats/{id}"])
     fun getRoomView(@PathVariable id: String, authentication: JwtAuthenticationToken, model: Model): String {
-        val response = chatClient.get(authentication.token.tokenValue, id)?.let(ChatView::from)
+        val response = chatClient.get(authentication.token.tokenValue, id)
         model.addAttribute("chat", response)
         return "/chatRoom/main"
     }
