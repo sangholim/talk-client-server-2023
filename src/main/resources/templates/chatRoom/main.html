@@ -12,7 +12,8 @@
     <script th:inline="javascript">
     /*<![CDATA[*/
         document.addEventListener("DOMContentLoaded", () => {
-            chat.message.client.endpoint = /*[[${chat.id}]]*/;
+            chat.message.client.endpoint = /*[[${chat.chatId}]]*/;
+            chat.message.client.sender = /*[[${chat.chatParticipantId}]]*/;
             chat.message.client.connect();
         });
     /*]]>*/
