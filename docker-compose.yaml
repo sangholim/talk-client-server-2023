@@ -88,9 +88,8 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: password
     entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]
     healthcheck:
-      test: test $$(echo "rs.initiate({_id:'rs0',members:[{_id:0,host:\"localhost:27017\"}]}).ok || rs.status().ok" | mongo --port 27017 --quiet) -eq 1
-      interval: 10s
-      start_period: 30s
+      test: ["CMD-SHELL", "sh -c /scripts/rs-init.sh"]
+      interval: 20s
     # 볼륨 설정
     volumes:
       - ./data/mongo/:/var/lib/mongo/data
