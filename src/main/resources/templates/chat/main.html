@@ -17,7 +17,7 @@
 </div>
 <div layout:fragment="content">
     <th:block th:each="chat: ${chats}">
-        <div class="item row row-col-2 border-bottom" th:onclick="|location.href='@{/chats/{chatId}(chatId=${chat.id})}'|">
+        <div class="item row row-col-2 border-bottom" th:onclick="|location.href='@{/chats/{chatId}(chatId=${chat.chatId})}'|">
             <div class="col-2 mt-3 mb-3">
                 <div class="row h-100">
                     <div class="d-flex justify-content-center align-items-center">
