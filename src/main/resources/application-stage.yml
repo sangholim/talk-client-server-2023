@@ -1,0 +1,43 @@
+server:
+  port: 8080
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${AUTHORIZATION_SERVER_URI}
+          jwk-set-uri: ${AUTHORIZATION_SERVER_URI}/oauth2/v1/jwks
+      client:
+        registration:
+          sso: # registrationId
+            client-id: chat-client
+            client-secret: chat-secret
+            clientAuthenticationMethod: client_secret_post
+            authorizationGrantType: authorization_code
+            redirectUri: ${TALK_CLIENT_SERVER_URI}/login/oauth2/code/sso
+            scope:
+              - openid
+            clientName: sign in sso
+        provider:
+          sso:
+            issuerUri: ${AUTHORIZATION_SERVER_URI}
+            authorizationUri: ${AUTHORIZATION_SERVER_URI}/oauth2/v1/authorize
+            tokenUri: ${AUTHORIZATION_SERVER_URI}/oauth2/v1/token
+            userInfoUri: ${AUTHORIZATION_SERVER_URI}/connect/v1/userinfo
+            jwkSetUri: ${AUTHORIZATION_SERVER_URI}/oauth2/v1/jwks
+            userNameAttribute: sub
+  thymeleaf:
+    suffix: .html
+    mode: HTML
+    cache: false
+    check-template: false
+    encoding: UTF-8
+    template-resolver-order: 1
+
+resource-client:
+  baseUrl: ${RESOURCE_SERVER_URI}
+
+logging:
+  level:
+    root: INFO
