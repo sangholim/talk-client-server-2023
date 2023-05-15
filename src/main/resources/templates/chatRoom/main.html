@@ -8,10 +8,11 @@
     <script th:src="@{/js/rsocket/rsocket-websocket-client.js}"></script>
 
     <script type="text/javascript" th:src="@{/js/components/spinner.js}"></script>
-    <script type="text/javascript" th:src="@{/js/chat/chat-message-client.js}"></script>
+    <script type="text/javascript" th:src="@{/js/chat/chat-room.js}"></script>
     <script th:inline="javascript">
     /*<![CDATA[*/
         document.addEventListener("DOMContentLoaded", () => {
+            chat.participant.items = /*[[${chat.participants}]]*/;
             chat.message.client.endpoint = /*[[${chat.chatId}]]*/;
             chat.message.client.sender = /*[[${chat.chatParticipantId}]]*/;
             chat.message.client.connect();

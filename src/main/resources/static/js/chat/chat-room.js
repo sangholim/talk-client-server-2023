@@ -1,4 +1,14 @@
 const chat = {
+    participant: {
+        _items: [],
+      set items(chatParticipants) {
+          if(!chatParticipants) return false;
+          chat.participant._items = chatParticipants;
+      },
+      get: (chatParticipantId) => {
+        return chat.participant._items.find(x => x.id == chatParticipantId)
+      },
+    },
     message : {
         viewId: "message-view",
         templateId: "message-template",
@@ -27,9 +37,11 @@ const chat = {
             insert: (data) => {
                 let messageView = document.querySelector(`#${chat.message.viewId} .col`);
                 let message = document.getElementById(chat.message.templateId).cloneNode(true);
-                message.querySelector(".message-name > .col").textContent = data.chatParticipantId;
+                let chatParticipant = chat.participant.get(data.chatParticipantId)
+                message.querySelector(".message-name > .col").textContent = chatParticipant.name;
                 message.querySelector(".message-content > .col").textContent = data.content;
                 message.classList.remove("d-none");
+                message.classList.add(`${chatParticipant.id}`);
                 messageView.insertBefore(message, null);
             }
         },
