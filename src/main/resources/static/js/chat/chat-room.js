@@ -12,12 +12,13 @@ const chat = {
     message : {
         viewId: "message-view",
         templateId: "message-template",
-        messageSendFormId: "message-send-form",
+        senderTemplateId: "message-sender-template",
+        sendFormId: "message-send-form",
         sendForm: {
             elements: () => {
                 let instance;
                 function init() {
-                    let messageForm = document.getElementById(chat.message.messageSendFormId);
+                    let messageForm = document.getElementById(chat.message.sendFormId);
                     return {
                         textArea: messageForm.querySelector("textarea"),
                         button: messageForm.querySelector("button")
@@ -35,11 +36,12 @@ const chat = {
         },
         viewForm: {
             insert: (data) => {
+                let chatParticipant = chat.participant.get(data.chatParticipantId);
+                let messageTemplateId = (chatParticipant.id === chat.message.client._sender)? chat.message.senderTemplateId : chat.message.templateId;
                 let messageView = document.querySelector(`#${chat.message.viewId} .col`);
-                let message = document.getElementById(chat.message.templateId).cloneNode(true);
-                let chatParticipant = chat.participant.get(data.chatParticipantId)
-                message.querySelector(".message-name > .col").textContent = chatParticipant.name;
-                message.querySelector(".message-content > .col").textContent = data.content;
+                let message = document.getElementById(messageTemplateId).cloneNode(true);
+                message.querySelector(".message-name > .col > div").textContent = chatParticipant.name;
+                message.querySelector(".message-content > .col > div").textContent = data.content;
                 message.classList.remove("d-none");
                 message.classList.add(`${chatParticipant.id}`);
                 messageView.insertBefore(message, null);
